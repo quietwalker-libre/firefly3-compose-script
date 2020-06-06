@@ -1,20 +1,20 @@
 # firefly3-compose-script
 This is a script which will install and manage a docker compose deployed FireFly3 system
 
-# What is FireFlyIII
-Firefly is a free and open source personal finance manager. 
+# What is FireFly III
+[Firefly](https://www.firefly-iii.org) is a free and open source personal finance manager. 
 It offer a lot of feature such as: 
-- Full transaction management: You can quickly enter and organize your transactions in multiple currencies. 
-- Budget, categories and tags: Need to budget your expenses? Want to categorize all of your hobby expenses? Look no further. Firefly III supports all kinds
-- Rule Engine: Use the rule engine to automatically set budgets, remove categories, append descriptions, change notes or something else entirely. 
-- Import transactions: Firefly III can import from variety of sources using the wonderful Salt Edge API, that allows access to over 2500 financial institutions and counting and it is also capable to import from CSV files
-- Reports: Firefly III has advanced reporting capabilities, showing your expenses per week, month or year. 
-- JSON REST API: if you don't know what this mean, then you don't need this feature :P 
+- **Full transaction management**: You can quickly enter and organize your transactions in multiple currencies. 
+- **Budget, categories and tags**: Need to budget your expenses? Want to categorize all of your hobby expenses? Look no further. Firefly III supports all kinds
+- **Rule Engine**: Use the rule engine to automatically set budgets, remove categories, append descriptions, change notes or something else entirely. 
+- **Import transactions**: Firefly III can import from variety of sources using the wonderful Salt Edge API, that allows access to over 2500 financial institutions and counting and it is also capable to import from CSV files
+- **Reports**: Firefly III has advanced reporting capabilities, showing your expenses per week, month or year. 
+- **JSON REST API**: if you don't know what this mean, then you don't need this feature :P 
 
 # Dependeces 
 It ony require 2 packages to be executed: 
-- docker 
-- docker-compose 
+- *docker* 
+- *docker-compose* 
 
 # How to use
 The script, if launched without arguments, it will display a little helper reporting the possible arguments that can be used.
