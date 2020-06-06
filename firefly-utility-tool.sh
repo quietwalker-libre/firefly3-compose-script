@@ -108,9 +108,8 @@ stop () {
 delete_all () {
     stop 
     docker-compose -f firefly.yaml down 
-    # just for sec reason. Sometimes the compose down seems it doens't remove all volumes 
-    echo "[*] Deleting volumes..."
-    docker volume rm firefly-compose_firefly_iii_db firefly-compose_firefly_iii_export firefly-compose_firefly_iii_upload
+    echo "[*] Deleting all local volumes..."
+    docker volume rm firefly3-compose-script_firefly_iii_db firefly3-compose-script_firefly_iii_export firefly3-compose-script_firefly_iii_upload
 }
 
 
@@ -146,7 +145,16 @@ case $1 in
     ;;
 
   --delete)
-    delete_all
+
+    echo "[!] The delete operation will delete all FireFly III data, so all records will be wiped."
+    while true; do
+        read -p "[!] Do you want to continue? [y/n]: " DEL_VAR
+        case $DEL_VAR in
+            [Yy]* ) delete_all; break;;
+            [Nn]* ) exit;;
+            * ) echo "[!] Please answer yes or no.";;
+        esac
+    done
     ;;
 
   *)
