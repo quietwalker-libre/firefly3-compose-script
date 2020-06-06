@@ -39,7 +39,6 @@ check_dependecies
 
 
 read -p "[*] Please insert the Firefly III database username: " FIREFLY_DB_USR
-echo -e "[*] Please insert the database password for the user ${FIREFLY_DB_USR}: "
 read -s -p "[*] Please insert the database password for the user ${FIREFLY_DB_USR}:" SECRET_FIREFLY_PWD
 
 echo -e "\n${YELLOW}[*] Downloading Firefly env file ${NOCOLOR}"
