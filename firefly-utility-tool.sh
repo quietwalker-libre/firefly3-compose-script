@@ -80,7 +80,7 @@ container_num=$(docker container ls -f name=fireflyiii | sed -n '1!p' | wc -l)
 counter=0
 while [ $container_num -lt 1 ] && [ $counter -lt 20 ]; do
     sleep 5
-    $counter=$(($counter+1))
+    counter=$(($counter+1))
 done
 
 if [ $counter -lt 20 ]; then
