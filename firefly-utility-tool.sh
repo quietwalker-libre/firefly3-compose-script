@@ -57,18 +57,16 @@ echo -e "${YELLOW}[*] Editing the env file with custom variables ${NOCOLOR}"
 sed -i "s|APP_KEY=SomeRandomStringOf32CharsExactly|APP_KEY=$APP_KEY_RANDOM|" firefly-env
 sed -i "s|DEFAULT_LANGUAGE=en_US|DEFAULT_LANGUAGE=it_IT|" firefly-env
 sed -i "s|TZ=Europe/Amsterdam|TZ=Europe/Rome|" firefly-env
-sed -i "s|DB_CONNECTION=mysql|DB_CONNECTION=pgsql|" firefly-env
-sed -i "s|DB_HOST=fireflyiiidb|DB_HOST=fireflydb|" firefly-env
-sed -i "s|DB_PORT=3306|DB_PORT=5432|" firefly-env
 sed -i "s|DB_USERNAME=firefly|DB_USERNAME=$FIREFLY_DB_USR|" firefly-env
 sed -i "s|DB_PASSWORD=secret_firefly_password|DB_PASSWORD=$SECRET_FIREFLY_PWD|" firefly-env
 
 echo -e "${YELLOW}[*] Creating Postgres env file ${NOCOLOR}"
 
-cat <<EOF >postgres-env
-    POSTGRES_USER=$FIREFLY_DB_USR
-    POSTGRES_PASSWORD=$SECRET_FIREFLY_PWD
-    POSTGRES_DB=firefly
+cat <<EOF >mysql-env
+MYSQL_RANDOM_ROOT_PASSWORD=yes
+MYSQL_USER=$FIREFLY_DB_USR
+MYSQL_PASSWORD=$SECRET_FIREFLY_PWD
+MYSQL_DATABASE=firefly
 EOF
 
 echo -e "${YELLOW}[*] Executing docker compose up${NOCOLOR}"
@@ -76,7 +74,7 @@ docker-compose -f firefly.yaml up -d
 
 echo -e "${YELLOW}[*] Containers initialization started.${NOCOLOR}" 
 echo -e "${YELLOW}[*] Waiting for container creation. It could take some minutes to be running...${NOCOLOR}"
-container_num=$(docker container ls -f name=fireflyiii | sed -n '1!p' | wc -l)
+container_num=$(docker container ls -f name=firefly3 | sed -n '1!p' | wc -l)
 counter=0
 while [ $container_num -lt 1 ] && [ $counter -lt 20 ]; do
     sleep 5
@@ -85,8 +83,8 @@ done
 
 if [ $counter -lt 20 ]; then
     echo -e "${YELLOW}[*] Displaying container logs...${NOCOLOR}"
-    CONTAINER_ID=$(docker ps | grep firefly-iii:latest | awk {'print $1'})
-    timeout 20s docker container logs -f $CONTAINER_ID 
+    CONTAINER_ID=$(docker ps | grep fireflyiii | awk {'print $1'})
+    timeout 30s docker container logs -f $CONTAINER_ID 
 
     echo -e "${GREEN}[*] Now you should be able to access Firefly from http://localhost using your browser${NOCOLOR}"
 else 
@@ -108,7 +106,7 @@ delete_all () {
     stop 
     docker-compose -f firefly.yaml down 
     echo "[*] Deleting all local volumes..."
-    docker volume rm firefly3-compose-script_firefly_iii_db firefly3-compose-script_firefly_iii_export firefly3-compose-script_firefly_iii_upload
+    docker volume rm firefly3-compose-script_firefly_iii_db firefly3-compose-script_firefly_iii_upload
 }
 
 
